@@ -1,20 +1,24 @@
+
 from flask import Flask
 from flask_cors import CORS
-from flask_marshmallow import Marshmallow
 from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+
+
 
 app = Flask(__name__)
-
 app.config.from_object('config')
 
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+
 CORS(app)
 
-#Importar classes de modelo
-from app.models import produto
+
+# Importa classes de modelo
+from app.models import estacao
 db.create_all()
 
-#Importar as classes contoladoras
-from app.controllers.produto_controller import ProdutoController
-app.register_blueprint(ProdutoController.produto_controller, url_prefix="/api/v1/")
+# Importa classes controladoras
+from app.controllers.estacao_controller import EstacaoController
+app.register_blueprint(EstacaoController.estacao_controller, url_prefix="/api/v1")
